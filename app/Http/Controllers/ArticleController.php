@@ -18,7 +18,7 @@ class ArticleController extends Controller
         // get the articles
         $articles = Article::paginate(20);
 
-        // return the colection of articles as a resource
+        // return the collection of articles as a resource
         return ArticleResource::collection($articles);
     }
 
@@ -39,9 +39,12 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($id)
     {
-        //
+        // get a specific article as per the article id
+        $article = Article::findorFail($id);
+
+        return new ArticleResource($article);
     }
 
     /**
